@@ -278,13 +278,12 @@
             element.innerHTML = message;
             element.style.display = 'block';
             
-            // Auto-hide after 10 seconds
+            // Auto-hide after 30 seconds
             setTimeout(() => {
                 element.style.display = 'none';
-            }, 10000);
+            }, 30000);
         }
 
-        // 🤖 Inline AI Enhancement Function - Uses existing backend endpoint
         async function enhanceDescriptionInline() {
             const descriptionField = document.getElementById('description');
             const productNameField = document.getElementById('product_name');
@@ -316,21 +315,37 @@
             // Show loading state
             enhanceBtn.disabled = true;
             enhanceBtn.textContent = '🤖 Enhancing...';
-            aiStatus.textContent = 'Google AI is enhancing your description...';
+            aiStatus.textContent = 'Google Gemini AI is enhancing your description...';
             aiStatus.style.color = '#007bff';
 
             try {
-                // Use client-side enhancement with your existing Google Cloud Service logic
-                const originalDescription = descriptionField.value;
-                const productName = productNameField.value;
-                
-                // Simulate your Google Cloud Service enhancement
-                const enhanced = await enhanceWithAI(originalDescription, productName, craftType, materials);
-                
-                // Update the description field with enhanced text
-                descriptionField.value = enhanced;
-                aiStatus.textContent = '✨ Description enhanced with Google AI!';
-                aiStatus.style.color = 'green';
+                const response = await fetch(`${API_BASE}/enhance-description-preview`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        description: descriptionField.value,
+                        product_name: productNameField.value,
+                        craft_type: craftType,
+                        materials: materials
+                    })
+                });
+
+                if (!response.ok) {
+                    throw new Error('AI enhancement failed');
+                }
+
+                const result = await response.json();
+
+                if (result.success) {
+                    // Update the description field with REAL AI-enhanced text
+                    descriptionField.value = result.enhanced_description;
+                    aiStatus.textContent = '✨ Description enhanced with Google Gemini AI!';
+                    aiStatus.style.color = 'green';
+                } else {
+                    throw new Error(result.error || 'Enhancement failed');
+                }
 
             } catch (error) {
                 console.error('AI Enhancement error:', error);
@@ -341,25 +356,11 @@
                 enhanceBtn.disabled = false;
                 enhanceBtn.textContent = '🤖 Enhance with Google AI';
                 
-                // Clear status after 5 seconds
+                // Clear status after 30 seconds
                 setTimeout(() => {
                     aiStatus.textContent = '';
-                }, 5000);
+                }, 30000);
             }
-        }
-
-        // AI Enhancement Logic (matches your Google Cloud Service)
-        async function enhanceWithAI(rawDescription, productName, craftType, materials) {
-            // This mimics your Google Cloud Service enhancement logic
-            const materialsText = materials.join(', ');
-            
-            // Enhanced version following your AI prompt pattern
-            const enhanced = `This exquisite handcrafted ${productName.toLowerCase()} showcases the artistry of ${craftType.toLowerCase()} masters, featuring ${rawDescription.toLowerCase()} using ${materialsText}. Each piece reflects skilled craftsmanship and celebrates India's rich cultural heritage, bringing authentic traditional artistry to your collection.`;
-            
-            // Simulate AI processing delay
-            await new Promise(resolve => setTimeout(resolve, 1500));
-            
-            return enhanced;
         }
 
         // Artisan registration
