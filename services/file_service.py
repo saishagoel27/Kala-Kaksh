@@ -59,14 +59,11 @@ class FileService:
             product_dir = os.path.join(self.product_images_dir, product_id)
             os.makedirs(product_dir, exist_ok=True)
             
-            # Full path where image will be saved
             file_path = os.path.join(product_dir, filename)
             file.save(file_path)
             
-            # Make the image web-friendly
             self._resize_image(file_path)
             
-            # Path for the front-end to access
             url_path = f"uploads/products/{product_id}/{filename}"
             
             return {
