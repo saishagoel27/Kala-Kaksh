@@ -7,7 +7,6 @@ from utils.helpers import allowed_file
 
 class FileService:
     def __init__(self, upload_dir="uploads"):
-        # Set up our upload directories
         self.upload_dir = upload_dir
         self.product_images_dir = os.path.join(upload_dir, "products")
         self.profile_images_dir = os.path.join(upload_dir, "profiles")
