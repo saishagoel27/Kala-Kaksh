@@ -40,11 +40,9 @@ class FileService:
                 
                 img.thumbnail((max_width, max_height), Image.Resampling.LANCZOS)
                 
-                # Save optimized version
                 img.save(image_path, 'JPEG', quality=quality, optimize=True)
                 
         except Exception as e:
-            # Just log and continue if resize fails - original will be kept
             print(f"Couldn't resize image {image_path}: {e}")
     
     def upload_product_image(self, file, product_id):
