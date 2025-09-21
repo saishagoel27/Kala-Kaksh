@@ -142,9 +142,7 @@ class FileService:
             for product_dir in os.listdir(self.product_images_dir):
                 full_path = os.path.join(self.product_images_dir, product_dir)
                 
-                # Skip .gitkeep and focus on directories
                 if os.path.isdir(full_path) and product_dir not in valid_product_ids:
-                    # This product ID doesn't exist anymore, delete its folder
                     shutil.rmtree(full_path)
                     print(f"Cleaned up images for deleted product: {product_dir}")
                     
@@ -155,10 +153,8 @@ class FileService:
         """Get metadata about an uploaded file"""
         try:
             if os.path.exists(file_path):
-                # Get file stats
                 stat = os.stat(file_path)
                 
-                # Return useful info
                 return {
                     'exists': True,
                     'size_bytes': stat.st_size,
