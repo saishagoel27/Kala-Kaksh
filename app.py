@@ -418,9 +418,9 @@ def internal_error(error):
 
 if __name__ == '__main__':
     # Show some nice startup messages
-    print("🚀 Starting KALA KAKSH Backend...")
-    print("📍 Health Check: http://localhost:5000/api/health")
-    print("📊 Dashboard: http://localhost:5000/api/dashboard")
+    print("Starting KALA KAKSH Backend...")
+    print("Health Check: http://localhost:5000/api/health")
+    print("Dashboard: http://localhost:5000/api/dashboard")
     
     # Run the app
     app.run(host='0.0.0.0', port=5000, debug=True)
