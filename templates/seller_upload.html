@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KALA KAKSH - Seller Upload</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #555;
+        }
+        input, textarea, select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+        textarea {
+            height: 100px;
+            resize: vertical;
+        }
+        .btn {
+            background-color: #007bff;
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-right: 10px;
+        }
+        .btn:hover {
+            background-color: #0056b3;
+        }
+        .btn-secondary {
+            background-color: #6c757d;
+        }
+        .btn-secondary:hover {
+            background-color: #545b62;
+        }
+        .response {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 5px;
+            display: none;
+        }
+        .success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        .section {
+            border: 1px solid #eee;
+            margin-bottom: 30px;
+            padding: 20px;
+            border-radius: 5px;
+        }
+        .section h3 {
+            margin-top: 0;
+            color: #333;
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎨 KALA KAKSH - Seller Portal</h1>
+        
+        <!-- Artisan Registration Section -->
+        <div class="section">
+            <h3>👤 Register as Artisan</h3>
+            <form id="artisanForm">
+                <div class="form-group">
+                    <label for="artisan_name">Full Name *</label>
+                    <input type="text" id="artisan_name" name="name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="artisan_email">Email *</label>
+                    <input type="email" id="artisan_email" name="email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="artisan_phone">Phone Number *</label>
+                    <input type="tel" id="artisan_phone" name="phone" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="craft_type">Craft Type *</label>
+                    <select id="craft_type" name="craft_type" required>
+                        <option value="">Select your craft</option>
+                        <option value="Pottery">Pottery</option>
+                        <option value="Embroidery">Embroidery</option>
+                        <option value="Woodcarving">Woodcarving</option>
+                        <option value="Weaving">Weaving</option>
+                        <option value="Metalwork">Metalwork</option>
+                        <option value="Painting">Painting</option>
+                        <option value="Jewelry">Jewelry Making</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="city">City *</label>
+                    <input type="text" id="city" name="city" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="state">State *</label>
+                    <input type="text" id="state" name="state" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="experience">Years of Experience</label>
+                    <input type="number" id="experience" name="experience_years" min="0" max="50">
+                </div>
+                
+                <div class="form-group">
+                    <label for="bio">About Your Craft</label>
+                    <textarea id="bio" name="bio" placeholder="Tell us about your craft, your story, your techniques..."></textarea>
+                </div>
+                
+                <button type="submit" class="btn">Register as Artisan</button>
+            </form>
+            <div id="artisanResponse" class="response"></div>
+        </div>
+
+        <!-- Product Upload Section -->
+        <div class="section">
+            <h3>📦 Add New Product</h3>
+            <form id="productForm">
+                <div class="form-group">
+                    <label for="artisan_id">Your Artisan ID</label>
+                    <input type="text" id="artisan_id" name="artisan_id" placeholder="Get this from artisan registration above" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="product_name">Product Name *</label>
+                    <input type="text" id="product_name" name="name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="description">Description *</label>
+                    <textarea id="description" name="description" required placeholder="Describe your product, materials used, techniques..."></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="price">Price (₹) *</label>
+                    <input type="number" id="price" name="price" min="1" step="0.01" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="category">Category *</label>
+                    <select id="category" name="category" required>
+                        <option value="">Select category</option>
+                        <option value="Home Decor">Home Decor</option>
+                        <option value="Kitchen">Kitchen</option>
+                        <option value="Clothing">Clothing</option>
+                        <option value="Jewelry">Jewelry</option>
+                        <option value="Art">Art</option>
+                        <option value="Toys">Toys</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="materials">Materials (comma separated)</label>
+                    <input type="text" id="materials" name="materials" placeholder="e.g., Clay, Natural colors, Cotton">
+                </div>
+                
+                <div class="form-group">
+                    <label for="stock">Stock Quantity *</label>
+                    <input type="number" id="stock" name="stock_quantity" min="1" value="1" required>
+                </div>
+                
+                <button type="submit" class="btn">Add Product</button>
+            </form>
+            <div id="productResponse" class="response"></div>
+        </div>
+
+        <!-- Image Upload Section -->
+        <div class="section">
+            <h3>📷 Upload Product Images</h3>
+            <form id="imageForm" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="image_product_id">Product ID</label>
+                    <input type="text" id="image_product_id" name="product_id" placeholder="Get this from product creation above" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="product_image">Choose Image</label>
+                    <input type="file" id="product_image" name="image" accept="image/*" required>
+                </div>
+                
+                <button type="submit" class="btn">Upload Image</button>
+            </form>
+            <div id="imageResponse" class="response"></div>
+        </div>
+        
+        <!-- Test Buttons -->
+        <div class="section">
+            <h3>🧪 Test Backend APIs</h3>
+            <button class="btn btn-secondary" onclick="testHealthCheck()">Health Check</button>
+            <button class="btn btn-secondary" onclick="testGetArtisans()">Get All Artisans</button>
+            <button class="btn btn-secondary" onclick="testGetProducts()">Get All Products</button>
+            <button class="btn btn-secondary" onclick="testDashboard()">Dashboard Stats</button>
+            <div id="testResponse" class="response"></div>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE = 'http://localhost:5000/api';
+
+        // Helper function to show responses
+        function showResponse(elementId, message, isSuccess = true) {
+            const element = document.getElementById(elementId);
+            element.className = `response ${isSuccess ? 'success' : 'error'}`;
+            element.innerHTML = message;
+            element.style.display = 'block';
+            
+            // Auto-hide after 10 seconds
+            setTimeout(() => {
+                element.style.display = 'none';
+            }, 10000);
+        }
+
+        // Artisan registration
+        document.getElementById('artisanForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const formData = new FormData(e.target);
+            const data = {
+                name: formData.get('name'),
+                email: formData.get('email'),
+                phone: formData.get('phone'),
+                craft_type: formData.get('craft_type'),
+                location: {
+                    city: formData.get('city'),
+                    state: formData.get('state')
+                },
+                bio: formData.get('bio'),
+                experience_years: parseInt(formData.get('experience_years')) || 0
+            };
+
+            try {
+                const response = await fetch(`${API_BASE}/artisans`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data)
+                });
+
+                const result = await response.json();
+                
+                if (result.success) {
+                    showResponse('artisanResponse', 
+                        `✅ Artisan registered successfully!<br>
+                        <strong>Your ID:</strong> ${result.data.id}<br>
+                        <em>Copy this ID for product uploads</em>`);
+                    document.getElementById('artisan_id').value = result.data.id;
+                    e.target.reset();
+                } else {
+                    showResponse('artisanResponse', `❌ Error: ${result.error}`, false);
+                }
+            } catch (error) {
+                showResponse('artisanResponse', `❌ Network error: ${error.message}`, false);
+            }
+        });
+
+        // Product creation
+        document.getElementById('productForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const formData = new FormData(e.target);
+            const materialsString = formData.get('materials');
+            const materials = materialsString ? materialsString.split(',').map(m => m.trim()) : [];
+            
+            const data = {
+                artisan_id: formData.get('artisan_id'),
+                name: formData.get('name'),
+                description: formData.get('description'),
+                price: parseFloat(formData.get('price')),
+                category: formData.get('category'),
+                materials: materials,
+                stock_quantity: parseInt(formData.get('stock_quantity'))
+            };
+
+            try {
+                const response = await fetch(`${API_BASE}/products`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data)
+                });
+
+                const result = await response.json();
+                
+                if (result.success) {
+                    showResponse('productResponse', 
+                        `✅ Product added successfully!<br>
+                        <strong>Product ID:</strong> ${result.data.id}<br>
+                        <em>Copy this ID for image uploads</em>`);
+                    document.getElementById('image_product_id').value = result.data.id;
+                    e.target.reset();
+                } else {
+                    showResponse('productResponse', `❌ Error: ${result.error}`, false);
+                }
+            } catch (error) {
+                showResponse('productResponse', `❌ Network error: ${error.message}`, false);
+            }
+        });
+
+        // Image upload
+        document.getElementById('imageForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const formData = new FormData(e.target);
+            const productId = formData.get('product_id');
+
+            try {
+                const response = await fetch(`${API_BASE}/products/${productId}/images`, {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const result = await response.json();
+                
+                if (result.success) {
+                    showResponse('imageResponse', 
+                        `✅ Image uploaded successfully!<br>
+                        <strong>File:</strong> ${result.filename}<br>
+                        <strong>URL:</strong> ${result.url}`);
+                    e.target.reset();
+                } else {
+                    showResponse('imageResponse', `❌ Error: ${result.error}`, false);
+                }
+            } catch (error) {
+                showResponse('imageResponse', `❌ Network error: ${error.message}`, false);
+            }
+        });
+
+        // Test functions
+        async function testHealthCheck() {
+            try {
+                const response = await fetch(`${API_BASE}/health`);
+                const result = await response.json();
+                showResponse('testResponse', `✅ Health Check: ${JSON.stringify(result, null, 2)}`);
+            } catch (error) {
+                showResponse('testResponse', `❌ Health Check Failed: ${error.message}`, false);
+            }
+        }
+
+        async function testGetArtisans() {
+            try {
+                const response = await fetch(`${API_BASE}/artisans`);
+                const result = await response.json();
+                showResponse('testResponse', `✅ Artisans: Found ${result.count} artisans`);
+            } catch (error) {
+                showResponse('testResponse', `❌ Get Artisans Failed: ${error.message}`, false);
+            }
+        }
+
+        async function testGetProducts() {
+            try {
+                const response = await fetch(`${API_BASE}/products`);
+                const result = await response.json();
+                showResponse('testResponse', `✅ Products: Found ${result.count} products`);
+            } catch (error) {
+                showResponse('testResponse', `❌ Get Products Failed: ${error.message}`, false);
+            }
+        }
+
+        async function testDashboard() {
+            try {
+                const response = await fetch(`${API_BASE}/dashboard`);
+                const result = await response.json();
+                showResponse('testResponse', `✅ Dashboard: ${JSON.stringify(result.data, null, 2)}`);
+            } catch (error) {
+                showResponse('testResponse', `❌ Dashboard Failed: ${error.message}`, false);
+            }
+        }
+    </script>
+</body>
+</html>
