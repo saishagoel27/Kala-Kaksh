@@ -20,36 +20,42 @@ class GoogleCloudService:
                 self.storage_client = storage.Client()
                 self.bucket = self.storage_client.bucket(self.bucket_name)
                 print("🌩️ Connected to Google Cloud Storage!")
-                
-                # Vertex AI for text generation
-                try:
-                    import vertexai
-                    from vertexai.language_models import TextGenerationModel
-                    
-                    vertexai.init(project=self.project_id, location="us-central1")
-                    self.text_model = TextGenerationModel.from_pretrained("text-bison@001")
-                    print("🤖 Vertex AI Text Generation ready!")
-                    self.ai_available = True
-                except Exception as ai_error:
-                    print(f"⚠️ Vertex AI not available: {ai_error}")
-                    self.ai_available = False
-                    
             except Exception as e:
-                print(f"⚠️ Google Cloud not available: {e}")
+                print(f"⚠️ Google Cloud Storage not available: {e}")
                 self.use_cloud = False
+        
+        # 🤖 NEW: Initialize Gemini AI (Direct API)
+        try:
+            import google.generativeai as genai
+            
+            # Get API key from config
+            api_key = os.environ.get('GOOGLE_API_KEY')
+            if api_key:
+                # Remove quotes if they exist
+                api_key = api_key.strip('"')
+                genai.configure(api_key=api_key)
+                self.gemini_model = genai.GenerativeModel('gemini-1.5-flash')
+                print("🤖 Gemini AI ready!")
+                self.ai_available = True
+            else:
+                print("⚠️ No GOOGLE_API_KEY found in environment")
                 self.ai_available = False
-        else:
+                
+        except Exception as ai_error:
+            print(f"⚠️ Gemini AI not available: {ai_error}")
             self.ai_available = False
 
     def enhance_product_description(self, raw_description, product_name, craft_type, materials):
-        """Use Vertex AI to create compelling product descriptions"""
+        """Use Gemini AI or fallback to create compelling product descriptions"""
         try:
-            if not self.use_cloud or not self.ai_available:
-                print("📝 AI not available, returning original description")
-                return raw_description
+            if not self.ai_available:
+                print("📝 Using fallback text enhancement")
+                return self._fallback_enhance_description(raw_description, product_name, craft_type, materials)
             
+            # Prepare materials text
             materials_text = ', '.join(materials) if materials else 'Traditional materials'
             
+            # Create a prompt for Gemini
             prompt = f"""Transform this artisan product description into compelling marketing copy:
 
 Product: {product_name}
@@ -62,25 +68,31 @@ Create a 2-3 sentence description that:
 - Mentions the artisan's skill and heritage
 - Appeals to buyers seeking authentic handmade items
 - Uses warm, storytelling language
+- Keeps the cultural authenticity
 
 Enhanced Description:"""
             
-            # Calling Vertex AI
-            response = self.text_model.predict(
-                prompt=prompt,
-                max_output_tokens=150,
-                temperature=0.7,
-                top_p=0.8
-            )
-            
+            # Call Gemini AI
+            response = self.gemini_model.generate_content(prompt)
             enhanced_text = response.text.strip()
-            print(f"✨ Description enhanced with AI!")
+            print(f"✨ Description enhanced with Gemini AI!")
             return enhanced_text
             
         except Exception as e:
             print(f"⚠️ AI enhancement failed: {e}")
-            return raw_description 
+            print("📝 Using fallback text enhancement")
+            return self._fallback_enhance_description(raw_description, product_name, craft_type, materials)
+    
+    def _fallback_enhance_description(self, raw_description, product_name, craft_type, materials):
+        """Fallback text enhancement when AI is not available"""
+        materials_text = ', '.join(materials) if materials else 'traditional materials'
+        
+        enhanced = f"This exquisite handcrafted {product_name.lower()} showcases the artistry of {craft_type.lower()} masters, featuring {raw_description.lower()} using {materials_text}. Each piece reflects skilled craftsmanship and celebrates India's rich cultural heritage, bringing authentic traditional artistry to your collection."
+        
+        print("✨ Description enhanced with fallback method!")
+        return enhanced
 
+    # ...rest of your existing methods remain the same...
     def _generate_unique_filename(self, original_filename):
         """Create a unique name for the file so no two files have same name"""
         _, ext = os.path.splitext(original_filename)
@@ -111,7 +123,7 @@ Enhanced Description:"""
             
         except Exception as e:
             print(f"⚠️ Image enhancement failed: {e}")
-            return image_bytes  # Return original if enhancement fails
+            return image_bytes
     
     def upload_product_image(self, file, product_id):
         """Upload product image with AI enhancement"""
