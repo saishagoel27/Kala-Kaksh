@@ -38,7 +38,6 @@ class FileService:
                 if img.mode in ('RGBA', 'LA', 'P'):
                     img = img.convert('RGB')
                 
-                # Keep aspect ratio with thumbnail
                 img.thumbnail((max_width, max_height), Image.Resampling.LANCZOS)
                 
                 # Save optimized version
