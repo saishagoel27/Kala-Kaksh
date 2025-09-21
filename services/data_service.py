@@ -11,10 +11,8 @@ class DataService:
         self.artisans_file = os.path.join(data_dir, "artisans.json")
         self.products_file = os.path.join(data_dir, "products.json")
         
-        # Make sure we have our data files
         os.makedirs(data_dir, exist_ok=True)
         
-        # Init empty files if they don't exist
         if not os.path.exists(self.artisans_file):
             save_json_data([], self.artisans_file)
         
@@ -53,7 +51,7 @@ class DataService:
                 save_json_data(artisans, self.artisans_file)
                 return artisan
         
-        return None  # Not found
+        return None  
     
     # Product methods
     def get_all_products(self) -> List[Product]:
@@ -107,9 +105,8 @@ class DataService:
                 save_json_data(products, self.products_file)
                 return product
         
-        return None  # Not found
+        return None  
     
-    # Utility methods
     def get_categories(self) -> List[str]:
         products = self.get_all_products()
         categories = set(p.category for p in products)
