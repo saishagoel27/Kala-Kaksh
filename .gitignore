@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+.env
+
+# Flask
+instance/
+.webassets-cache
+
+# Uploads
+uploads/*
+!uploads/.gitkeep
+
+# Data
+data/*.json.bak
+
+# IDEs and editors
+.vscode/
+
