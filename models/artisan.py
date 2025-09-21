@@ -8,25 +8,22 @@ class Artisan:
         self.name = name
         self.email = email
         self.phone = phone
-        self.craft_type = craft_type  # e.g., pottery, weaving
-        self.location = location      # {city, state}
+        self.craft_type = craft_type  
+        self.location = location      
         self.bio = bio
         self.experience_years = int(experience_years) if experience_years else 0
         
-        # Profile data
         self.profile_image = None
         self.created_at = get_timestamp()
         self.updated_at = get_timestamp()
         self.status = "active"
         self.verified = False
         
-        # Stats
         self.rating = 0.0
         self.total_products = 0
         self.total_orders = 0
         
     def to_dict(self):
-        # Convert to dict for JSON serialization
         return {
             'id': self.id,
             'name': self.name,
@@ -48,7 +45,6 @@ class Artisan:
     
     @classmethod
     def from_dict(cls, data):
-        # Create artisan from dict (from JSON)
         artisan = cls(
             name=data['name'],
             email=data['email'],
@@ -58,7 +54,6 @@ class Artisan:
             bio=data.get('bio'),
             experience_years=data.get('experience_years', 0)
         )
-        # Override auto-generated values
         artisan.id = data['id']
         artisan.profile_image = data.get('profile_image')
         artisan.created_at = data['created_at']
