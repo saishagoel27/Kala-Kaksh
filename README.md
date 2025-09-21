@@ -1,6 +1,6 @@
 # 🎨 KALA KAKSH - AI-Powered Artisan Marketplace
 
-**Empowering Indian artisans with Google Cloud AI technology**
+**KALA KAKSH revolutionises the way Indian artisans showcase their craft online. ** Built on **Google Cloud's cutting-edge AI stack**, this backend transforms simple product descriptions into compelling cultural narratives while providing enterprise-grade image processing and storage.**
 
 ##  Quick Start
 
