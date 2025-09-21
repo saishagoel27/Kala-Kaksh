@@ -106,14 +106,10 @@ class FileService:
     def delete_image(self, file_path):
         """Remove an image from disk"""
         try:
-            # Handle both URL paths and full paths
             full_path = file_path
             if file_path.startswith('uploads/'):
-                # This is a URL path, not a full path
-                # The file is already relative to the app root, so we can use it directly
                 full_path = file_path
             
-            # Delete if exists
             if os.path.exists(full_path):
                 os.remove(full_path)
                 return True
