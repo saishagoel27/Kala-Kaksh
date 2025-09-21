@@ -1,16 +1,5 @@
 # 🔄 KALA KAKSH - Complete Workflow Guide
 
-> **From Artisan Registration to AI-Enhanced Product Listings**
-
----
-
-## 🎯 **Workflow Overview**
-
-KALA KAKSH provides a seamless pipeline for Indian artisans to showcase their products with Google AI enhancement. This document outlines the complete technical workflow from registration to product listing.
-
----
-
-## 📋 **Complete User Journey**
 
 ```mermaid
 graph TD
@@ -27,7 +16,7 @@ graph TD
 
 ---
 
-## 🚀 **Step-by-Step Workflow**
+##  **Step-by-Step Workflow**
 
 ### **Step 1: Artisan Registration** 👤
 
@@ -109,8 +98,8 @@ graph TD
 **Google AI Processing**:
 ```
 ┌─────────────────┐    ┌──────────────────┐    ┌─────────────────┐
-│  Basic Input    │───▶│   Gemini 1.5     │───▶│ Cultural Story  │
-│  "Mirror work"  │    │   Flash AI       │    │ + Hindi Terms   │
+│  Basic Input    │───▶│   Gemini 1.5     │───▶│ Cultural Story │
+│  "Mirror work"  │    │   Flash AI       │    │                 │
 └─────────────────┘    └──────────────────┘    └─────────────────┘
 ```
 
