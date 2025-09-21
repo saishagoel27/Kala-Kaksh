@@ -1,0 +1,210 @@
+[
+  {
+    "id": "d4e5f6g7-h8i9-0123-jklm-456789012345",
+    "artisan_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+    "name": "Blue Ceramic Vase",
+    "description": "Handcrafted traditional blue pottery vase with intricate floral designs. Made using natural clay and non-toxic colors.",
+    "price": 1200,
+    "category": "Home Decor",
+    "subcategory": "Vases",
+    "materials": [
+      "Clay",
+      "Natural colors"
+    ],
+    "dimensions": {
+      "height": 25,
+      "diameter": 15
+    },
+    "weight": 0.8,
+    "stock_quantity": 5,
+    "images": [],
+    "created_at": "2023-09-15T13:30:00",
+    "updated_at": "2023-09-15T13:30:00",
+    "status": "active",
+    "tags": [
+      "pottery",
+      "blue pottery",
+      "vase",
+      "handmade"
+    ],
+    "featured": true
+  },
+  {
+    "id": "e5f6g7h8-i9j0-1234-klmn-567890123456",
+    "artisan_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+    "name": "Ceramic Tea Set",
+    "description": "Beautiful hand-painted tea set with 4 cups and teapot. Made with food-safe glazes and traditional designs.",
+    "price": 1800,
+    "category": "Kitchen",
+    "subcategory": "Dining",
+    "materials": [
+      "Clay",
+      "Natural colors"
+    ],
+    "dimensions": {
+      "length": 30,
+      "width": 20,
+      "height": 15
+    },
+    "weight": 1.2,
+    "stock_quantity": 3,
+    "images": [],
+    "created_at": "2023-09-15T14:00:00",
+    "updated_at": "2023-09-15T14:00:00",
+    "status": "active",
+    "tags": [
+      "pottery",
+      "tea set",
+      "dining",
+      "handmade"
+    ],
+    "featured": false
+  },
+  {
+    "id": "f6g7h8i9-j0k1-2345-lmno-678901234567",
+    "artisan_id": "b2c3d4e5-f6a7-8901-bcde-f12345678901",
+    "name": "Embroidered Wall Hanging",
+    "description": "Vibrant mirror work wall hanging with traditional Kutch patterns. Each piece takes over 20 days to complete.",
+    "price": 2500,
+    "category": "Home Decor",
+    "subcategory": "Wall Art",
+    "materials": [
+      "Cotton",
+      "Mirrors",
+      "Thread"
+    ],
+    "dimensions": {
+      "length": 60,
+      "width": 40
+    },
+    "weight": 0.5,
+    "stock_quantity": 2,
+    "images": [],
+    "created_at": "2023-09-15T14:30:00",
+    "updated_at": "2023-09-15T14:30:00",
+    "status": "active",
+    "tags": [
+      "embroidery",
+      "wall art",
+      "kutch",
+      "handmade"
+    ],
+    "featured": true
+  },
+  {
+    "id": "g7h8i9j0-k1l2-3456-mnop-789012345678",
+    "artisan_id": "b2c3d4e5-f6a7-8901-bcde-f12345678901",
+    "name": "Embroidered Cushion Covers (Set of 2)",
+    "description": "Hand-embroidered cushion covers with traditional mirror work. Made with sustainable cotton and natural dyes.",
+    "price": 1200,
+    "category": "Home Decor",
+    "subcategory": "Cushions",
+    "materials": [
+      "Cotton",
+      "Mirrors",
+      "Thread"
+    ],
+    "dimensions": {
+      "length": 40,
+      "width": 40
+    },
+    "weight": 0.3,
+    "stock_quantity": 8,
+    "images": [],
+    "created_at": "2023-09-15T15:00:00",
+    "updated_at": "2023-09-15T15:00:00",
+    "status": "active",
+    "tags": [
+      "embroidery",
+      "cushions",
+      "home decor",
+      "handmade"
+    ],
+    "featured": false
+  },
+  {
+    "id": "h8i9j0k1-l2m3-4567-nopq-890123456789",
+    "artisan_id": "c3d4e5f6-g7h8-9012-ijkl-345678901234",
+    "name": "Carved Wooden Box",
+    "description": "Intricately carved storage box made from sustainable sheesham wood. Features traditional geometric patterns.",
+    "price": 1800,
+    "category": "Home Decor",
+    "subcategory": "Storage",
+    "materials": [
+      "Sheesham wood",
+      "Natural polish"
+    ],
+    "dimensions": {
+      "length": 25,
+      "width": 15,
+      "height": 10
+    },
+    "weight": 0.9,
+    "stock_quantity": 3,
+    "images": [],
+    "created_at": "2023-09-15T15:30:00",
+    "updated_at": "2023-09-15T15:30:00",
+    "status": "active",
+    "tags": [
+      "woodcarving",
+      "storage",
+      "handmade"
+    ],
+    "featured": true
+  },
+  {
+    "id": "i9j0k1l2-m3n4-5678-opqr-901234567890",
+    "artisan_id": "c3d4e5f6-g7h8-9012-ijkl-345678901234",
+    "name": "Wooden Wall Panels (Set of 3)",
+    "description": "Hand-carved decorative wall panels showing scenes from Indian mythology. Each panel is carved from a single piece of wood.",
+    "price": 3500,
+    "category": "Home Decor",
+    "subcategory": "Wall Art",
+    "materials": [
+      "Teak wood",
+      "Natural finish"
+    ],
+    "dimensions": {
+      "length": 30,
+      "width": 20,
+      "height": 2
+    },
+    "weight": 1.5,
+    "stock_quantity": 2,
+    "images": [],
+    "created_at": "2023-09-15T16:00:00",
+    "updated_at": "2023-09-15T16:00:00",
+    "status": "active",
+    "tags": [
+      "woodcarving",
+      "wall art",
+      "handmade"
+    ],
+    "featured": false
+  },
+  {
+    "id": "3a2acd50-610d-49f6-9b56-d2b7a02c69ee",
+    "artisan_id": "d1e28f47-1012-482e-b0a6-a83b17edce32",
+    "name": " Traditional Blue Pottery Vase",
+    "description": "Handcrafted blue pottery vase with intricate floral patterns. Made using traditional techniques passed down through generations. Food-safe and lead-free glazes.",
+    "price": 2500.0,
+    "category": "Home Decor",
+    "subcategory": null,
+    "materials": [
+      "Clay",
+      "Natural blue dye",
+      "Lead-free glaze"
+    ],
+    "dimensions": null,
+    "weight": null,
+    "stock_quantity": 5,
+    "images": [
+      "uploads/products/3a2acd50-610d-49f6-9b56-d2b7a02c69ee/616c5838-5e90-4086-a4ab-ffdd09581bae.jpg"
+    ],
+    "created_at": "2025-09-21T16:31:56.875824",
+    "updated_at": "2025-09-21T16:33:10.729904",
+    "status": "active",
+    "tags": [],
+    "featured": false
+  }
+]
