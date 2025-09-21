@@ -56,45 +56,34 @@ class GoogleCloudService:
             materials_text = ', '.join(materials) if materials else 'Traditional materials'
             
             # Create a prompt for Gemini
-            prompt = f"""Transform this simple artisan product description into a deeply emotional, story-driven marketing copy that connects hearts:
+            prompt = f"""You are a master storyteller and a passionate advocate for Indian artisans. Your voice is warm, poetic, and deeply respectful of cultural heritage. Your mission is to transform a simple product description into a soulful narrative that makes a buyer feel an emotional connection to the artisan and their craft.
 
-PRODUCT DETAILS:
-- Name: {product_name}
-- Craft: {craft_type} 
-- Materials: {materials_text}
-- Basic Description: {raw_description}
+**CONTEXT (संदर्भ):**
+*   **उत्पाद (Product):** {product_name}
+*   **शिल्प (Craft):** {craft_type}
+*   **सामग्री (Materials):** {materials_text}
+*   **मूल विवरण (Original Description):** {raw_description}
 
-CREATE AN EMOTIONAL STORY that includes:
+**YOUR TASK (आपका काम):**
+Craft a short, poetic, and deeply personal product description (3-4 sentences) that tells a story. This is not marketing copy; it is a piece of the artisan's soul translated into words.
 
+**STORYTELLING PILLARS (कहानी के स्तंभ):**
+1.  **The Artisan's Hands (कारीगर के हाथ):** Begin with the human touch. Describe the hands that made this item—are they weathered, gentle, skilled? Mention the "समर्पण" (dedication) and love poured into the work.
+2.  **Generational Echoes (पीढ़ियों की गूंज):** Connect the craft to a lineage. Use phrases that evoke a sense of time, like "wisdom passed down through generations" or "techniques whispered from mother to daughter."
+3.  **A Piece of India (भारत का एक टुकड़ा):** Ground the product in its cultural soil. What does it represent? A festival's joy? The peace of a rural morning? The sanctity of a home?
+4.  **The Buyer's Blessing (खरीदार का आशीर्वाद):** Conclude by explaining the emotional or spiritual value for the buyer. They are not just buying an object; they are receiving a blessing, preserving a tradition, or bringing home a piece of "विरासत" (heritage).
 
-🏛️ HERITAGE & LEGACY:
-- Mention generations of artisan families
-- Reference ancient techniques and traditions
-- Connect to India's rich cultural tapestry
+**TONE & STYLE (शैली और अंदाज़):**
+*   **Heartfelt & Intimate:** Write as if you are sharing a precious secret.
+*   **Poetic Language:** Use metaphors and sensory details (e.g., "the warmth of the sun-baked clay," "threads that shimmer like a monsoon sky").
+*   **Authentic Blend:** Weave in 1-2 simple Hindi words naturally to add authenticity, followed by their English meaning in parentheses. For example: "...carries the artisan's *आशीर्वाद* (blessings)..."
+*   **AVOID:** Do not use generic marketing phrases like "exquisite," "masterpiece," "high-quality," or "buy now." Let the story sell itself.
 
-💝 HUMAN CONNECTION:
-- Tell the story of the artisan's hands creating this piece
-- Mention the time, care, and love invested
-- Reference the hopes and dreams embedded in each piece
+**EXAMPLE OUTPUT STRUCTURE:**
+(Sentence 1: The Artisan's Hands) -> (Sentence 2: Generational Echoes) -> (Sentence 3: A Piece of India & The Buyer's Blessing).
 
-🌟 SENSORY & EMOTIONAL APPEAL:
-- Use words that evoke touch, warmth, and comfort
-- Create imagery of the artisan's workshop
-- Make the buyer feel they're bringing home a piece of someone's soul
-
-🇮🇳 CULTURAL PRIDE:
-- Celebrate the beauty of Indian craftsmanship
-- Reference the spiritual significance of handmade items
-- Connect to festivals, traditions, or daily rituals
-
-📝 REQUIREMENTS:
-- Write 3-4 sentences that tell a STORY, not just describe features
-- Use emotional, warm, and evocative language
-- Make it feel like bringing home a piece of India's heart
-- End with how this piece will enrich the buyer's life
-- Be specific about the craft and cultural context
-
-Write a description that makes someone fall in love with this piece and the story behind it."""
+Now, using this framework, create the soulful narrative for the product detailed above.
+"""
             
             # Call Gemini AI
             response = self.gemini_model.generate_content(prompt)
