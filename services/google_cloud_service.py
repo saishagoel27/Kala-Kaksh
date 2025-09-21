@@ -20,10 +20,71 @@ class GoogleCloudService:
                 self.storage_client = storage.Client()
                 self.bucket = self.storage_client.bucket(self.bucket_name)
                 print("🌩️ Connected to Google Cloud Storage!")
+                
+                # Vertex AI for text generation
+                try:
+                    import vertexai
+                    from vertexai.language_models import TextGenerationModel
+                    
+                    vertexai.init(project=self.project_id, location="us-central1")
+                    self.text_model = TextGenerationModel.from_pretrained("text-bison@001")
+                    print("🤖 Vertex AI Text Generation ready!")
+                    self.ai_available = True
+                except Exception as ai_error:
+                    print(f"⚠️ Vertex AI not available: {ai_error}")
+                    self.ai_available = False
+                    
             except Exception as e:
                 print(f"⚠️ Google Cloud not available: {e}")
                 self.use_cloud = False
-    
+                self.ai_available = False
+        else:
+            self.ai_available = False
+
+    # 🤖 NEW: AI Enhancement Methods
+    def enhance_product_description(self, raw_description, product_name, craft_type, materials):
+        """Use Vertex AI to create compelling product descriptions"""
+        try:
+            if not self.use_cloud or not self.ai_available:
+                print("📝 AI not available, returning original description")
+                return raw_description
+            
+            # Prepare materials text
+            materials_text = ', '.join(materials) if materials else 'Traditional materials'
+            
+            # Create a prompt for the AI
+            prompt = f"""Transform this artisan product description into compelling marketing copy:
+
+Product: {product_name}
+Craft Type: {craft_type}
+Materials: {materials_text}
+Original Description: {raw_description}
+
+Create a 2-3 sentence description that:
+- Highlights traditional Indian craftsmanship
+- Mentions the artisan's skill and heritage
+- Appeals to buyers seeking authentic handmade items
+- Uses warm, storytelling language
+
+Enhanced Description:"""
+            
+            # Call Vertex AI
+            response = self.text_model.predict(
+                prompt=prompt,
+                max_output_tokens=150,
+                temperature=0.7,
+                top_p=0.8
+            )
+            
+            enhanced_text = response.text.strip()
+            print(f"✨ Description enhanced with AI!")
+            return enhanced_text
+            
+        except Exception as e:
+            print(f"⚠️ AI enhancement failed: {e}")
+            return raw_description  # Always return something
+
+    # ...existing code for image uploads...
     def _generate_unique_filename(self, original_filename):
         """Create a unique name for the file so no two files have same name"""
         _, ext = os.path.splitext(original_filename)
