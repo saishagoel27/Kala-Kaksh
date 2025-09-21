@@ -56,21 +56,45 @@ class GoogleCloudService:
             materials_text = ', '.join(materials) if materials else 'Traditional materials'
             
             # Create a prompt for Gemini
-            prompt = f"""Transform this artisan product description into compelling marketing copy:
+            prompt = f"""Transform this simple artisan product description into a deeply emotional, story-driven marketing copy that connects hearts:
 
-Product: {product_name}
-Craft Type: {craft_type}
-Materials: {materials_text}
-Original Description: {raw_description}
+PRODUCT DETAILS:
+- Name: {product_name}
+- Craft: {craft_type} 
+- Materials: {materials_text}
+- Basic Description: {raw_description}
 
-Create a 2-3 sentence description that:
-- Highlights traditional Indian craftsmanship
-- Mentions the artisan's skill and heritage
-- Appeals to buyers seeking authentic handmade items
-- Uses warm, storytelling language
-- Keeps the cultural authenticity
+CREATE AN EMOTIONAL STORY that includes:
 
-Enhanced Description:"""
+
+🏛️ HERITAGE & LEGACY:
+- Mention generations of artisan families
+- Reference ancient techniques and traditions
+- Connect to India's rich cultural tapestry
+
+💝 HUMAN CONNECTION:
+- Tell the story of the artisan's hands creating this piece
+- Mention the time, care, and love invested
+- Reference the hopes and dreams embedded in each piece
+
+🌟 SENSORY & EMOTIONAL APPEAL:
+- Use words that evoke touch, warmth, and comfort
+- Create imagery of the artisan's workshop
+- Make the buyer feel they're bringing home a piece of someone's soul
+
+🇮🇳 CULTURAL PRIDE:
+- Celebrate the beauty of Indian craftsmanship
+- Reference the spiritual significance of handmade items
+- Connect to festivals, traditions, or daily rituals
+
+📝 REQUIREMENTS:
+- Write 3-4 sentences that tell a STORY, not just describe features
+- Use emotional, warm, and evocative language
+- Make it feel like bringing home a piece of India's heart
+- End with how this piece will enrich the buyer's life
+- Be specific about the craft and cultural context
+
+Write a description that makes someone fall in love with this piece and the story behind it."""
             
             # Call Gemini AI
             response = self.gemini_model.generate_content(prompt)
