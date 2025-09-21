@@ -15,7 +15,6 @@ class FileService:
     
     def _create_directories(self):
         """Create necessary folders for file uploads"""
-        # Make the main dirs
         os.makedirs(self.product_images_dir, exist_ok=True)
         os.makedirs(self.profile_images_dir, exist_ok=True)
         
