@@ -18,7 +18,6 @@ class FileService:
         os.makedirs(self.product_images_dir, exist_ok=True)
         os.makedirs(self.profile_images_dir, exist_ok=True)
         
-        # Add .gitkeep files so empty dirs are tracked in git
         for directory in [self.product_images_dir, self.profile_images_dir]:
             gitkeep = os.path.join(directory, ".gitkeep")
             if not os.path.exists(gitkeep):
