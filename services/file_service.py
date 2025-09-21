@@ -11,7 +11,6 @@ class FileService:
         self.product_images_dir = os.path.join(upload_dir, "products")
         self.profile_images_dir = os.path.join(upload_dir, "profiles")
         
-        # Make sure folders exist
         self._create_directories()
     
     def _create_directories(self):
