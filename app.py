@@ -23,6 +23,14 @@ google_service = GoogleCloudService()
 def uploaded_file(filename):
     return send_from_directory('uploads', filename)
 
+@app.route('/')
+def index():
+    return send_from_directory('templates', 'seller_upload.html')
+
+@app.route('/seller-upload')
+def seller_upload():
+    return send_from_directory('templates', 'seller_upload.html')
+
 # API routes
 @app.route('/api/health')
 def health_check():
