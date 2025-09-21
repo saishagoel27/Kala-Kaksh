@@ -48,17 +48,14 @@ class FileService:
     def upload_product_image(self, file, product_id):
         """Handle product image upload and processing"""
         try:
-            # Quick validation
             if not file or file.filename == '':
                 return {'success': False, 'error': 'No file selected'}
             
             if not allowed_file(file.filename):
                 return {'success': False, 'error': 'Only image files allowed (PNG, JPG, JPEG, GIF, WEBP)'}
             
-            # Make filename safe and unique
             filename = self._generate_unique_filename(file.filename)
             
-            # Store in product-specific folder
             product_dir = os.path.join(self.product_images_dir, product_id)
             os.makedirs(product_dir, exist_ok=True)
             
