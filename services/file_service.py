@@ -27,7 +27,6 @@ class FileService:
         """Create unique filename to avoid conflicts"""
         _, ext = os.path.splitext(original_filename)
         
-        # Use UUID for uniqueness
         unique_name = str(uuid.uuid4())
         
         # Return safe name
