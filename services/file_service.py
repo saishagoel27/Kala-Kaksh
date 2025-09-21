@@ -25,7 +25,6 @@ class FileService:
     
     def _generate_unique_filename(self, original_filename):
         """Create unique filename to avoid conflicts"""
-        # Split extension
         _, ext = os.path.splitext(original_filename)
         
         # Use UUID for uniqueness
