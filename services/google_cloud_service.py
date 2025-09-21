@@ -24,14 +24,11 @@ class GoogleCloudService:
                 print(f"⚠️ Google Cloud Storage not available: {e}")
                 self.use_cloud = False
         
-        # 🤖 NEW: Initialize Gemini AI (Direct API)
         try:
             import google.generativeai as genai
             
-            # Get API key from config
             api_key = os.environ.get('GOOGLE_API_KEY')
             if api_key:
-                # Remove quotes if they exist
                 api_key = api_key.strip('"')
                 genai.configure(api_key=api_key)
                 self.gemini_model = genai.GenerativeModel('gemini-1.5-flash')
@@ -52,10 +49,8 @@ class GoogleCloudService:
                 print("📝 Using fallback text enhancement")
                 return self._fallback_enhance_description(raw_description, product_name, craft_type, materials)
             
-            # Prepare materials text
             materials_text = ', '.join(materials) if materials else 'Traditional materials'
             
-            # Create a prompt for Gemini
             prompt = f"""You are a master storyteller and a passionate advocate for Indian artisans. Your voice is warm, poetic, and deeply respectful of cultural heritage. Your mission is to transform a simple product description into a soulful narrative that makes a buyer feel an emotional connection to the artisan and their craft.
 
 **CONTEXT (संदर्भ):**
@@ -104,8 +99,7 @@ Now, using this framework, create the soulful narrative for the product detailed
         
         print("✨ Description enhanced with fallback method!")
         return enhanced
-
-    # ...rest of your existing methods remain the same...
+    
     def _generate_unique_filename(self, original_filename):
         """Create a unique name for the file so no two files have same name"""
         _, ext = os.path.splitext(original_filename)
@@ -117,17 +111,13 @@ Now, using this framework, create the soulful narrative for the product detailed
         try:
             print("🤖 Enhancing image with AI...")
             
-            # Open the image from bytes
             img = Image.open(io.BytesIO(image_bytes))
             
-            # Convert to RGB if it has transparency
             if img.mode in ('RGBA', 'LA', 'P'):
                 img = img.convert('RGB')
             
-            # Make it web-friendly size
             img.thumbnail((800, 600), Image.Resampling.LANCZOS)
             
-            # Save as optimized JPEG
             output = io.BytesIO()
             img.save(output, format='JPEG', quality=90, optimize=True)
             
@@ -141,7 +131,6 @@ Now, using this framework, create the soulful narrative for the product detailed
     def upload_product_image(self, file, product_id):
         """Upload product image with AI enhancement"""
         try:
-            # Basic checks
             if not file or file.filename == '':
                 return {'success': False, 'error': 'No file selected'}
             
@@ -150,34 +139,28 @@ Now, using this framework, create the soulful narrative for the product detailed
             
             print(f"📸 Uploading image for product {product_id}...")
             
-            # Read the file
+
             file_content = file.read()
             
-            # Enhance it with AI
             enhanced_content = self._enhance_image_with_ai(file_content)
             
-            # Create unique filename
             filename = self._generate_unique_filename(file.filename)
             
             if self.use_cloud:
-                # Upload to Google Cloud Storage
                 blob_path = f"products/{product_id}/{filename}"
                 blob = self.bucket.blob(blob_path)
                 
-                # Upload the enhanced image
                 blob.upload_from_string(
                     enhanced_content,
                     content_type='image/jpeg'
                 )
                 
-                # Make it accessible to everyone
                 blob.make_public()
                 
                 url = blob.public_url
                 storage_type = "Google Cloud Storage"
                 
             else:
-                # Fallback logic
                 product_dir = os.path.join('uploads/products', product_id)
                 os.makedirs(product_dir, exist_ok=True)
                 
