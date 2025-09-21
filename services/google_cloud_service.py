@@ -51,33 +51,25 @@ class GoogleCloudService:
             
             materials_text = ', '.join(materials) if materials else 'Traditional materials'
             
-            prompt = f"""You are a master storyteller and a passionate advocate for Indian artisans. Your voice is warm, poetic, and deeply respectful of cultural heritage. Your mission is to transform a simple product description into a soulful narrative that makes a buyer feel an emotional connection to the artisan and their craft.
+            prompt = f"""You are a master storyteller for Indian artisans. Create a short (3 sentences max), deeply personal product description that evokes emotion and cultural heritage.
 
-**CONTEXT (संदर्भ):**
-*   **उत्पाद (Product):** {product_name}
-*   **शिल्प (Craft):** {craft_type}
-*   **सामग्री (Materials):** {materials_text}
-*   **मूल विवरण (Original Description):** {raw_description}
+**CONTEXT:**
+* Product: {product_name}
+* Craft: {craft_type}
+* Materials: {materials_text}
+* Description: {raw_description}
 
-**YOUR TASK (आपका काम):**
-Craft a short, poetic, and deeply personal product description (3-4 sentences) that tells a story. This is not marketing copy; it is a piece of the artisan's soul translated into words.
+**INSTRUCTIONS:**
+1. **Hands:** Start by describing the artisan's hands and their dedication (समर्पण).
+2. **Heritage:** Connect the craft to Indian traditions and generational wisdom (विरासत). Focus on the craft itself, not a specific place.
+3. **Blessing:** End by explaining the emotional value for the buyer (आशीर्वाद).
 
-**STORYTELLING PILLARS (कहानी के स्तंभ):**
-1.  **The Artisan's Hands (कारीगर के हाथ):** Begin with the human touch. Describe the hands that made this item—are they weathered, gentle, skilled? Mention the "समर्पण" (dedication) and love poured into the work.
-2.  **Generational Echoes (पीढ़ियों की गूंज):** Connect the craft to a lineage. Use phrases that evoke a sense of time, like "wisdom passed down through generations" or "techniques whispered from mother to daughter."
-3.  **A Piece of India (भारत का एक टुकड़ा):** Ground the product in its cultural soil. What does it represent? A festival's joy? The peace of a rural morning? The sanctity of a home?
-4.  **The Buyer's Blessing (खरीदार का आशीर्वाद):** Conclude by explaining the emotional or spiritual value for the buyer. They are not just buying an object; they are receiving a blessing, preserving a tradition, or bringing home a piece of "विरासत" (heritage).
+**STYLE:**
+* Heartfelt, poetic, intimate. Use sensory details related to the craft. Weave in 1-2 Hindi words.
+* AVOID specific location names. Do NOT mention cities, states, or regions.
+* AVOID generic phrases like "exquisite," "masterpiece," or "high-quality." Focus on unique storytelling.
 
-**TONE & STYLE (शैली और अंदाज़):**
-*   **Heartfelt & Intimate:** Write as if you are sharing a precious secret.
-*   **Poetic Language:** Use metaphors and sensory details (e.g., "the warmth of the sun-baked clay," "threads that shimmer like a monsoon sky").
-*   **Authentic Blend:** Weave in 1-2 simple Hindi words naturally to add authenticity, followed by their English meaning in parentheses. For example: "...carries the artisan's *आशीर्वाद* (blessings)..."
-*   **AVOID:** Do not use generic marketing phrases like "exquisite," "masterpiece," "high-quality," or "buy now." Let the story sell itself.
-
-**EXAMPLE OUTPUT STRUCTURE:**
-(Sentence 1: The Artisan's Hands) -> (Sentence 2: Generational Echoes) -> (Sentence 3: A Piece of India & The Buyer's Blessing).
-
-Now, using this framework, create the soulful narrative for the product detailed above.
+Now, create the soulful narrative.
 """
             
             # Call Gemini AI
