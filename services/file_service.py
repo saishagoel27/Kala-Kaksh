@@ -123,17 +123,13 @@ class FileService:
     
     def get_product_images(self, product_id):
         """Get all images for a product"""
-        # Path to product's image folder
         product_dir = os.path.join(self.product_images_dir, product_id)
         
-        # No folder = no images
         if not os.path.exists(product_dir):
             return []
         
-        # Build URL paths for all images
         images = []
         for filename in os.listdir(product_dir):
-            # Skip hidden files like .gitkeep
             if filename != '.gitkeep' and allowed_file(filename):
                 url_path = f"uploads/products/{product_id}/{filename}"
                 images.append(url_path)
@@ -143,7 +139,6 @@ class FileService:
     def cleanup_orphaned_images(self, valid_product_ids):
         """Delete images for products that no longer exist"""
         try:
-            # Check each folder in products dir
             for product_dir in os.listdir(self.product_images_dir):
                 full_path = os.path.join(self.product_images_dir, product_dir)
                 
