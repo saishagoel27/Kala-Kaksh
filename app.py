@@ -18,7 +18,6 @@ data = DataService()
 files = FileService() 
 google_service = GoogleCloudService()
 
-# Static file serving for uploads
 @app.route('/uploads/<path:filename>')
 def uploaded_file(filename):
     return send_from_directory('uploads', filename)
@@ -53,11 +52,10 @@ def get_dashboard_stats():
 # Artisan endpoints
 @app.route('/api/artisans')
 def get_artisans():
-    craft = request.args.get('craft_type')  # Shorter name
+    craft = request.args.get('craft_type') 
     verified = request.args.get('verified') == 'true'
     
     try:
-        # Get all and filter in memory - simple approach
         all_artisans = data.get_all_artisans()
         
         # Apply filters if needed
@@ -116,7 +114,6 @@ def create_artisan():
             experience_years=req.get('experience_years', 0)
         )
         
-        # Save to "database"
         data.create_artisan(artisan)
         
         return jsonify({'success': True, 'data': artisan.to_dict()}), 201
@@ -314,7 +311,6 @@ def update_product(product_id):
         if 'tags' in req:
             product.tags = req['tags']
         
-        # Update in database
         updated = data.update_product(product)
         
         return jsonify({'success': True, 'data': updated.to_dict()})
@@ -349,6 +345,36 @@ def upload_product_image(product_id):
     except Exception as e:
         return jsonify({'success': False, 'error': str(e)}), 500
 
+@app.route('/api/enhance-description-preview', methods=['POST'])
+def enhance_description_preview():
+    """Enhance description without saving to database (for inline preview)"""
+    try:
+        req = request.json
+        if not req:
+            return jsonify({'success': False, 'error': 'No data provided'}), 400
+        
+        required = ['description', 'product_name', 'craft_type', 'materials']
+        for field in required:
+            if field not in req:
+                return jsonify({'success': False, 'error': f'Missing required field: {field}'}), 400
+        
+        enhanced_description = google_service.enhance_product_description(
+            req['description'], 
+            req['product_name'], 
+            req['craft_type'], 
+            req['materials']
+        )
+        
+        return jsonify({
+            'success': True,
+            'original_description': req['description'],
+            'enhanced_description': enhanced_description,
+            'ai_powered': True
+        })
+        
+    except Exception as e:
+        return jsonify({'success': False, 'error': str(e)}), 500
+
 # Utility endpoints
 @app.route('/api/categories')
 def get_categories():
@@ -371,29 +397,23 @@ def get_craft_types():
         })
     except Exception as e:
         return jsonify({'success': False, 'error': str(e)}), 500
-    # Add this new endpoint for AI-enhanced uploads
 @app.route('/api/products/<product_id>/images/enhanced', methods=['POST'])
 def upload_enhanced_product_image(product_id):
     """Upload product image with Google AI enhancement"""
     try:
-        # Check if product exists
         product = data.get_product_by_id(product_id)
         if not product:
             return jsonify({'success': False, 'error': 'Product not found'}), 404
-        
-        # Check if image was uploaded
         if 'image' not in request.files:
             return jsonify({'success': False, 'error': 'No image file provided'}), 400
             
         file = request.files['image']
         
-        # 🚀 Use Google AI to enhance the image
         result = google_service.upload_product_image(file, product_id)
         
         if not result['success']:
             return jsonify(result), 400
             
-        # Add enhanced image URL to product
         product.add_image(result['url'])
         data.update_product(product)
         
@@ -417,7 +437,7 @@ def internal_error(error):
     }), 500
 
 if __name__ == '__main__':
-    # Show some nice startup messages
+    
     print("Starting KALA KAKSH Backend...")
     print("Health Check: http://localhost:5000/api/health")
     print("Dashboard: http://localhost:5000/api/dashboard")
