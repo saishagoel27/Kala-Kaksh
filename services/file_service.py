@@ -79,24 +79,18 @@ class FileService:
     def upload_profile_image(self, file, artisan_id):
         """Save and optimize artisan profile photos"""
         try:
-            # Same validation as product images
             if not file or file.filename == '':
                 return {'success': False, 'error': 'No file selected'}
             
             if not allowed_file(file.filename):
                 return {'success': False, 'error': 'Only image files allowed'}
             
-            # Create unique name
             filename = self._generate_unique_filename(file.filename)
-            
-            # Profiles go in their own folder
             file_path = os.path.join(self.profile_images_dir, filename)
             file.save(file_path)
             
-            # Profile pics need different dimensions
             self._resize_image(file_path, max_width=400, max_height=400)
             
-            # URL for frontend
             url_path = f"uploads/profiles/{filename}"
             
             return {
