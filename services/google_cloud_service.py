@@ -41,7 +41,6 @@ class GoogleCloudService:
         else:
             self.ai_available = False
 
-    # 🤖 NEW: AI Enhancement Methods
     def enhance_product_description(self, raw_description, product_name, craft_type, materials):
         """Use Vertex AI to create compelling product descriptions"""
         try:
@@ -49,10 +48,8 @@ class GoogleCloudService:
                 print("📝 AI not available, returning original description")
                 return raw_description
             
-            # Prepare materials text
             materials_text = ', '.join(materials) if materials else 'Traditional materials'
             
-            # Create a prompt for the AI
             prompt = f"""Transform this artisan product description into compelling marketing copy:
 
 Product: {product_name}
@@ -68,7 +65,7 @@ Create a 2-3 sentence description that:
 
 Enhanced Description:"""
             
-            # Call Vertex AI
+            # Calling Vertex AI
             response = self.text_model.predict(
                 prompt=prompt,
                 max_output_tokens=150,
@@ -82,9 +79,8 @@ Enhanced Description:"""
             
         except Exception as e:
             print(f"⚠️ AI enhancement failed: {e}")
-            return raw_description  # Always return something
+            return raw_description 
 
-    # ...existing code for image uploads...
     def _generate_unique_filename(self, original_filename):
         """Create a unique name for the file so no two files have same name"""
         _, ext = os.path.splitext(original_filename)
