@@ -29,7 +29,6 @@ class FileService:
         
         unique_name = str(uuid.uuid4())
         
-        # Return safe name
         return secure_filename(f"{unique_name}{ext}")
     
     def _resize_image(self, image_path, max_width=800, max_height=600, quality=85):
