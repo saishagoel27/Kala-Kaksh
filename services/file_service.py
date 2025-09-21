@@ -35,7 +35,6 @@ class FileService:
         """Make images smaller and web-friendly"""
         try:
             with Image.open(image_path) as img:
-                # Handle transparency in PNG/GIF when saving to JPEG
                 if img.mode in ('RGBA', 'LA', 'P'):
                     img = img.convert('RGB')
                 
