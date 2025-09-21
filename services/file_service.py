@@ -21,7 +21,6 @@ class FileService:
         for directory in [self.product_images_dir, self.profile_images_dir]:
             gitkeep = os.path.join(directory, ".gitkeep")
             if not os.path.exists(gitkeep):
-                # Just touch the file
                 open(gitkeep, 'w').close()
     
     def _generate_unique_filename(self, original_filename):
