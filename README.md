@@ -14,7 +14,7 @@ python app.py
 
 **Access**: http://localhost:5000
 
-## 📸 Screenshots of the Seller Portal in the Backend
+## 📸 Screenshots of the Seller Portal at the backend
 
 <img width="1887" height="989" alt="Screenshot 2025-09-23 130939" src="https://github.com/user-attachments/assets/b021663e-df8a-43fb-ada0-1238b989bcd6" />
 
