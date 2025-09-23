@@ -14,6 +14,21 @@ python app.py
 
 **Access**: http://localhost:5000
 
+##📸 Screenshots of the Seller Portal in the Backend
+
+<img width="1887" height="989" alt="Screenshot 2025-09-23 130939" src="https://github.com/user-attachments/assets/b021663e-df8a-43fb-ada0-1238b989bcd6" />
+
+<img width="1892" height="904" alt="Screenshot 2025-09-23 130954" src="https://github.com/user-attachments/assets/5e1d1862-6d54-4373-9484-3d45e2b1e2e4" />
+
+<img width="1887" height="359" alt="Screenshot 2025-09-23 131007" src="https://github.com/user-attachments/assets/2f5f9e1c-bfbc-421b-ba54-7e6c6242bf7f" />
+
+
+
+
+
+
+
+
 ## 🤖 Features
 
 - **Artisan Registration** - Complete onboarding system
