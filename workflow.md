@@ -144,6 +144,6 @@ JSON Storage (data/)
 
 **🎨 End-to-End Artisan Empowerment Pipeline**
 
-*Built with Google Cloud • Enhanced by Gemini AI • Deployed with Pride*
+*Built with Google Cloud • Enhanced by Gemini AI*
 
 </div>
